@@ -1,0 +1,11 @@
+# Compiled Java files
+*.class
+
+# Build directory
+classes/
+
+# VS Code settings
+.vscode/
+
+# macOS files
+.DS_Store
