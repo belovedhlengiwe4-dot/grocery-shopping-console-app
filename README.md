@@ -7,6 +7,7 @@ A Java console application that simulates a simple grocery shopping experience.
 - Calculate the total bill
 - Custom exception handling for unavailable items
 - Item price calculations
+- Print a detailed shopping receipt
 
 ## Technologies Used
 - Java 21
@@ -26,4 +27,3 @@ A Java console application that simulates a simple grocery shopping experience.
 - Applying discounts
 - Add inventory management
 - Filter items below a chosen price
-- Print a detailed shopping receipt
