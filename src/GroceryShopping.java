@@ -62,9 +62,15 @@ public class GroceryShopping{
                     }
                     // Checks if user wants to finish shopping
                     else if (inputItem.equalsIgnoreCase("Finish")){
-                        System.out.println("===================================");
+                        float discount = 0.0f;
+                        if (cartTotal >= 700){
+                            discount = cartTotal * 0.1f;
+                            cartTotal -= discount;
+                        }
+
+                        System.out.println("====================================");
                         System.out.println("           GROCERY SHOP            ");
-                        System.out.println("===================================");
+                        System.out.println("====================================");
                         System.out.println();
                         
                         for (int p = 0; p < purchasedItem.length; p++){
@@ -77,7 +83,12 @@ public class GroceryShopping{
                             }
                         }
                         System.out.println();
-                        System.out.println("-----------------------------------");
+                        if (discount > 0){
+                            System.out.println("------------------------------------");
+                            System.out.printf("Subtotal                    R%.2f%n", (cartTotal + discount));
+                            System.out.printf("Discount                   -R%.2f%n", discount);
+                        }
+                        System.out.println("------------------------------------");
                         System.out.printf("Total                       R%.2f%n", cartTotal);
                         System.out.println();
                         System.out.println("Thank you for shopping with us.");
