@@ -28,11 +28,13 @@ public class GroceryShopping{
     public static void main (String[] args){
         String[] items = {"Milk", "Bread", "Maize Meal", "Maas", "Eggs", "Russians", "Boerewors", "Coffee", "Pasta", "Yogurt", "Potato Chips", "Bananas", "Pineapple"};
         float[] prices = {17.99f, 17.99f, 79.99f, 37.99f, 79.99f, 79.99f, 119.99f, 149.99f, 15.99f, 42.99f, 22.99f, 34.99f, 19.99f};
+        int[] stock = {7, 2, 10, 45, 45, 45, 45, 45, 45, 45, 45, 45, 45};
 
         Scanner in = new Scanner(System.in);
 
         while (true){
             System.out.println("============================ Grocery Shop ============================");
+            System.out.println("*Purchases of R700 or more, get a 10% discount. Happy shopping!*");
             float cartTotal = 0.00f;
             String[] purchasedItem = new String[items.length];
             int[] purchasedQuantity = new int[items.length];
@@ -106,15 +108,35 @@ public class GroceryShopping{
                         int itemQuantity = Integer.parseInt(in.nextLine());
 
                         if (itemQuantity > 0){
-                            //Add item to and quantity to arrays if quantity is valid
-                            purchasedItem[i++] = items[index];
-                            purchasedQuantity[j++] = itemQuantity;
+                            //Check if stock is available and enough
+                            if (stock[index] > 0 && stock[index] < itemQuantity){
+                                System.out.println("Sorry, only " + stock[index] + " item(s) left in stock.");
+                                System.out.println("Would you like to purchase what's left? Y/N");
+                                String userAnswer = in.nextLine();
+
+                                if(userAnswer.equalsIgnoreCase("Y")){
+                                    itemQuantity = stock[index];
+                                    stock[index] = 0;
+                                }else if(userAnswer.equalsIgnoreCase("N")){
+                                    continue;
+                                }else{
+                                    System.out.println("Invalid choice.");
+                                    continue;
+                                }
+                            }else if (stock[index] == 0){
+                                System.out.println("Sorry, 0 items left in stock.");
+                                continue;
+                            }else{
+                                stock[index] -= itemQuantity;
+                            }
 
                             // Calculate total cost of item and add it to cart total
                             float itemCost = prices[index] * itemQuantity;
                             cartTotal += itemCost;
 
-                            //Add item total to array for receipt
+                            //Add item, quantity and total to arrays for receipt
+                            purchasedItem[i++] = items[index];
+                            purchasedQuantity[j++] = itemQuantity;
                             purchasedTotal[k++] = itemCost;
 
                             System.out.printf("%d x %s added to cart. Current total: R%.2f%n", itemQuantity, items[index], cartTotal);
