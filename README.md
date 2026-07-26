@@ -10,7 +10,7 @@ A Java console application that simulates a simple grocery shopping experience.
 - Print a detailed shopping receipt
 - Filter items below a chosen price
 - Automatically apply discounts to qualifying purchases
-- Add inventory management
+- Inventory management
 
 ## Technologies Used
 - Java 21
